@@ -5,8 +5,12 @@ const axios = require('axios');
 
 module.exports.EsepWebhook = async (event, context, callback) => {
   try {
+    console.log(event);
     // Parse the input event
-    const json = JSON.parse(event);
+    const bodyString = JSON.parse(event.body);
+    const json = JSON.parse(bodyString);
+
+    console.log(json.issue.html_url);
 
     // Construct payload
     const payload = {
@@ -20,6 +24,8 @@ module.exports.EsepWebhook = async (event, context, callback) => {
     const response = await axios.post(slackUrl, payload, {
       headers: { 'Content-Type': 'application/json' }
     });
+
+    console.log(response);
 
     // Returning the response from the Slack API
     return response.data;
