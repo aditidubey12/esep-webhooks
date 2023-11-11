@@ -24,7 +24,7 @@ functions:
     events:
       - http:
           path: esep-webhook
-          method: get
+          method: post
           cors: true
 
 plugins:
