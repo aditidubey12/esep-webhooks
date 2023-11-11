@@ -1,0 +1,31 @@
+org: aditidubey
+app: esep-webhooks
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+service: esep-webhooks
+
+frameworkVersion: "3"
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+# The `functions` block defines what code to deploy
+functions:
+  EsepWebhook:
+    handler: handler.EsepWebhook
+    # The `events` block defines how to trigger the handler.EsepWebhook code
+    events:
+      - http:
+          path: esep-webhook
+          method: get
+          cors: true
+
+plugins:
+- serverless-offline
